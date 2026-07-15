@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistente de socios · Fitness Park</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: oklch(0.18 0.006 90);
+    --ink: oklch(0.96 0.01 95);
+    --ink-soft: oklch(0.80 0.012 95);
+    --muted: oklch(0.62 0.012 95);
+    --line: oklch(0.32 0.01 95);
+    --accent: oklch(0.86 0.17 96);
+    --accent-ink: oklch(0.20 0.02 96);
+    --panel: oklch(0.13 0.006 90);
+    --bot-bubble: oklch(0.26 0.008 95);
+    --user-bubble: oklch(0.86 0.17 96);
+    --s2:8px;--s3:12px;--s4:16px;--s6:24px;
+    --shadow: 0 1px 3px oklch(0 0 0/0.4), 0 18px 44px oklch(0 0 0/0.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background: radial-gradient(130% 80% at 100% 0%, oklch(0.4 0.09 96) 0%, transparent 40%), var(--bg);
+    background-attachment: fixed;
+    font-family:"Space Grotesk", system-ui, sans-serif; color:var(--ink);
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding: var(--s4); -webkit-font-smoothing:antialiased;
+  }
+  .phone{ width: 100%; max-width: 420px; background: var(--panel); border-radius: 26px; overflow:hidden; box-shadow: var(--shadow); border:1px solid var(--line); display:flex; flex-direction:column; height: min(760px, 92vh); }
+  .top{ background: #000; color:var(--accent); padding: var(--s4) var(--s6); display:flex; align-items:center; gap: var(--s3); border-bottom:1px solid var(--line); }
+  .avatar{ width:40px; height:40px; border-radius:12px; background: var(--accent); color:var(--accent-ink); display:grid; place-items:center; font-weight:700; font-size:1rem; flex:none; }
+  .top .who{ line-height:1.2; }
+  .top .who b{ font-size:0.98rem; font-weight:700; color: var(--ink); }
+  .top .who span{ font-size:0.76rem; color: var(--muted); display:flex; align-items:center; gap:5px; }
+  .top .who span::before{ content:''; width:7px; height:7px; border-radius:50%; background: oklch(0.78 0.16 145); display:inline-block; }
+  .chat{ flex:1; overflow-y:auto; padding: var(--s6); display:flex; flex-direction:column; gap: var(--s3); background: var(--bg); }
+  .msg{ max-width: 82%; padding: 11px 15px; border-radius:16px; font-size:0.92rem; line-height:1.45; animation: pop 0.4s cubic-bezier(0.22,1,0.36,1); }
+  @keyframes pop{ from{ opacity:0; transform: translateY(8px) scale(0.98);} to{opacity:1; transform:none;} }
+  .msg.bot{ background: var(--bot-bubble); color: var(--ink); align-self:flex-start; border-bottom-left-radius:5px; }
+  .msg.user{ background: var(--user-bubble); color: var(--accent-ink); align-self:flex-end; border-bottom-right-radius:5px; font-weight:500; }
+  .msg.bot b{ font-weight:600; color: var(--accent); }
+  .stamp{ font-size:0.68rem; color: var(--muted); align-self:center; margin: var(--s2) 0; }
+  .typing{ align-self:flex-start; background:var(--bot-bubble); padding:14px 16px; border-radius:16px; border-bottom-left-radius:5px; display:none; gap:4px; }
+  .typing.show{ display:flex; }
+  .typing span{ width:7px; height:7px; border-radius:50%; background: var(--muted); animation: bob 1.2s infinite; }
+  .typing span:nth-child(2){ animation-delay:0.15s; } .typing span:nth-child(3){ animation-delay:0.3s; }
+  @keyframes bob{ 0%,60%,100%{transform:translateY(0); opacity:0.4;} 30%{transform:translateY(-5px); opacity:1;} }
+  .suggest{ padding: var(--s3) var(--s6) 0; display:flex; flex-wrap:wrap; gap: var(--s2); background: var(--bg);}
+  .chip{ font-family:inherit; font-size:0.8rem; font-weight:600; color: var(--accent); background: oklch(0.28 0.05 96); border:1px solid oklch(0.4 0.07 96); padding:8px 13px; border-radius:100px; cursor:pointer; transition: all 0.15s cubic-bezier(0.22,1,0.36,1); }
+  .chip:hover{ background: var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .inbar{ padding: var(--s4) var(--s6); background: var(--panel); border-top:1px solid var(--line); display:flex; gap: var(--s2); }
+  .inbar input{ flex:1; border:1px solid var(--line); background: var(--bg); color: var(--ink); border-radius:100px; padding:11px 17px; font-family:inherit; font-size:0.9rem; outline:none; }
+  .inbar input::placeholder{ color: var(--muted); }
+  .inbar input:focus{ border-color: var(--accent); }
+  .inbar button{ background: var(--accent); border:none; width:44px; height:44px; border-radius:50%; color:var(--accent-ink); font-size:1.1rem; cursor:pointer; flex:none; transition: filter 0.15s, transform 0.15s;}
+  .inbar button:hover{ filter:brightness(1.1); transform:scale(1.05); }
+  .badge{ position:fixed; top:16px; left:16px; font-size:0.72rem; font-weight:600; color:var(--ink-soft); background:oklch(0.13 0.006 90/0.85); padding:7px 13px; border-radius:100px; border:1px solid var(--line); }
+</style>
+</head>
+<body>
+  <div class="badge">Demo · Asistente de socios</div>
+  <div class="phone">
+    <div class="top">
+      <div class="avatar">U</div>
+      <div class="who"><b>Asistente Fitness Park</b><span>Responde al instante</span></div>
+    </div>
+    <div class="chat" id="chat">
+      <div class="stamp">Hoy</div>
+      <div class="msg bot">¡Hola! 👋 Soy el asistente de Fitness Park. Puedo ayudarte con horarios, cuotas, bajas y dudas de tu socio. ¿Qué necesitas?</div>
+    </div>
+    <div class="typing" id="typing"><span></span><span></span><span></span></div>
+    <div class="suggest" id="suggest">
+      <button class="chip" onclick="ask('¿Cómo doy de baja mi cuota?')">¿Cómo doy de baja?</button>
+      <button class="chip" onclick="ask('¿Qué horario tiene el gimnasio?')">Horarios</button>
+      <button class="chip" onclick="ask('¿Cuánto cuesta la cuota?')">Precios</button>
+      <button class="chip" onclick="ask('¿Puedo entrar en otros clubs?')">Otros clubs</button>
+    </div>
+    <div class="inbar">
+      <input id="inp" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter')send()">
+      <button onclick="send()">→</button>
+    </div>
+  </div>
+  <script>
+    const chat = document.getElementById('chat');
+    const typing = document.getElementById('typing');
+    const inp = document.getElementById('inp');
+    const answers = [
+      { k:['baja','cancelar','darme de baja','anular'], a:"Para dar de baja tu suscripción debes <b>contactar directamente con tu club</b>, por teléfono o presencialmente, e indicar que quieres cancelar. Si te acabas de inscribir, tienes <b>14 días de desistimiento</b> desde la firma del contrato. ¿Quieres el teléfono de tu club?" },
+      { k:['horario','abre','cierra','hora','abierto'], a:"El gimnasio abre de <b>06:00 a 01:00, los 365 días del año</b>. La recepción atiende de <b>09:00 a 01:00</b>. Aun así, dime tu club y te confirmo por si tuviera alguna particularidad." },
+      { k:['precio','cuesta','cuota','tarifa','vale','mensualidad'], a:"La cuota <b>Con permanencia</b> es de <b>27€/4 semanas</b> (con oferta de 17€ las primeras 4 semanas y 30€ de matrícula). La opción <b>Sin permanencia</b> sale un poco más. También existe el pago anual. ¿Te detallo alguna?" },
+      { k:['otros club','otro club','otros gimnasios','acceso','todos los clubs','red'], a:"Con tu cuota tienes <b>acceso ilimitado a todos los clubs Fitness Park</b> de España y Francia (+300 clubs), además de la app. Solo necesitas tu credencial de socio." },
+      { k:['app','aplicacion','aplicación'], a:"Con la <b>app Fitness Park</b> sigues tus progresos, accedes a los vídeos de clases y gestionas tu cuenta. Está disponible para iOS y Android. ¿Necesitas ayuda para entrar?" },
+      { k:['clase','actividad','dirigida','coach'], a:"Tienes clases colectivas con coach y virtuales (Cycle Park, musculación guiada, cardio conectado...). La programación está en tu club y en la app. ¿Quieres que te diga cómo verlas?" },
+      { k:['congelar','pausar','vacaciones'], a:"La gestión de pausas depende de tu tipo de contrato y de tu club. Lo mejor es <b>consultarlo directamente con tu club</b>, que te dirá las opciones según tu suscripción. ¿Te paso su contacto?" },
+    ];
+    const fallback = "Buena pregunta. Puedo ayudarte con horarios, cuotas, bajas, acceso a clubs, la app y clases. Si es algo específico de tu cuenta, lo mejor es que contactes con tu club y lo revisan al momento. 😊";
+    function addMsg(text, who){ const d = document.createElement('div'); d.className = 'msg ' + who; d.innerHTML = text; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; }
+    function reply(q){ const lc = q.toLowerCase(); const hit = answers.find(o => o.k.some(k => lc.includes(k))); typing.classList.add('show'); chat.scrollTop = chat.scrollHeight; setTimeout(()=>{ typing.classList.remove('show'); addMsg(hit ? hit.a : fallback, 'bot'); }, 850); }
+    function ask(q){ addMsg(q,'user'); reply(q); }
+    function send(){ const v = inp.value.trim(); if(!v) return; addMsg(v,'user'); inp.value=''; reply(v); }
+  </script>
+</body>
+</html>

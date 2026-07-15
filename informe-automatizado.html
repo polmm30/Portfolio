@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe semanal automatizado · Upgyms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: oklch(0.16 0.006 90);
+    --paper: oklch(0.21 0.007 90);
+    --ink: oklch(0.96 0.01 95);
+    --ink-soft: oklch(0.80 0.012 95);
+    --muted: oklch(0.64 0.012 95);
+    --line: oklch(0.34 0.01 95);
+    --line-soft: oklch(0.27 0.008 95);
+    --accent: oklch(0.86 0.17 96);
+    --accent-ink: oklch(0.20 0.02 96);
+    --accent-wash: oklch(0.30 0.05 96);
+    --up: oklch(0.78 0.16 145);
+    --down: oklch(0.70 0.17 30);
+    --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px;
+    --shadow: 0 1px 3px oklch(0 0 0/0.3), 0 12px 32px oklch(0 0 0/0.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ background: var(--bg); color: var(--ink); font-family:"Space Grotesk", system-ui, sans-serif; line-height:1.5; padding: var(--s12) var(--s4); -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width: 860px; margin: 0 auto; }
+  .genbar{ background: var(--accent); color: var(--accent-ink); border-radius: 14px; padding: var(--s4) var(--s6); display:flex; align-items:center; gap: var(--s4); margin-bottom: var(--s6); }
+  .genbar .pulse{ width:10px; height:10px; border-radius:50%; background: var(--accent-ink); flex:none; animation: blink 1.4s ease-in-out infinite; }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  .genbar .txt{ font-size:0.9rem; }
+  .genbar .txt b{ font-weight:700; }
+  .genbar .txt span{ opacity:0.7; }
+  .genbar button{ margin-left:auto; background: var(--accent-ink); color: var(--accent); border:none; font-family:inherit; font-weight:700; font-size:0.85rem; padding:10px 18px; border-radius:9px; cursor:pointer; white-space:nowrap; transition: transform 0.15s cubic-bezier(0.22,1,0.36,1), filter 0.15s; }
+  .genbar button:hover{ filter:brightness(1.15); transform:translateY(-1px); }
+  .sheet{ background: var(--paper); border:1px solid var(--line); border-radius:16px; box-shadow: var(--shadow); overflow:hidden; }
+  .rhead{ padding: var(--s8) var(--s8) var(--s6); border-bottom:1px solid var(--line-soft); }
+  .rhead .eyebrow{ font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color: var(--accent); }
+  .rhead h1{ font-size:1.7rem; font-weight:700; letter-spacing:-0.02em; margin-top:var(--s2); }
+  .rhead .date{ color: var(--muted); font-size:0.9rem; margin-top:6px; }
+  .summary{ margin: var(--s6) var(--s8); background: var(--accent-wash); border:1px solid oklch(0.4 0.06 96); border-radius:12px; padding: var(--s6); }
+  .summary .lbl{ display:flex; align-items:center; gap:8px; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color: var(--accent); margin-bottom: var(--s3); }
+  .summary .lbl .dot{ width:14px; height:14px; border-radius:4px; background:var(--accent); display:grid; place-items:center; color:var(--accent-ink); font-size:9px; font-weight:700;}
+  .summary p{ font-size:1rem; color: var(--ink-soft); line-height:1.6; }
+  .summary p + p{ margin-top: var(--s3); }
+  .summary b{ color: var(--ink); font-weight:600; }
+  .kpis{ display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s3); padding: 0 var(--s8) var(--s6); }
+  .kpi{ border:1px solid var(--line); border-radius:11px; padding: var(--s4); }
+  .kpi .k{ font-size:0.72rem; color:var(--muted); font-weight:500; }
+  .kpi .v{ font-size:1.5rem; font-weight:700; letter-spacing:-0.02em; margin-top:4px; font-variant-numeric:tabular-nums; }
+  .kpi .d{ font-size:0.78rem; font-weight:600; margin-top:4px; display:flex; align-items:center; gap:4px; }
+  .kpi .d.up{ color:var(--up); }
+  .kpi .d.down{ color:var(--down); }
+  .tbl-wrap{ padding: 0 var(--s8) var(--s8); }
+  .tbl-title{ font-size:0.95rem; font-weight:600; margin: var(--s4) 0 var(--s3); }
+  table{ width:100%; border-collapse:collapse; font-size:0.88rem; }
+  th{ text-align:left; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:600; padding:8px 10px; border-bottom:1px solid var(--line); }
+  td{ padding:11px 10px; border-bottom:1px solid var(--line-soft); font-variant-numeric:tabular-nums; }
+  td.club{ font-weight:600; }
+  .pill{ font-size:0.72rem; font-weight:600; padding:3px 9px; border-radius:100px; }
+  .pill.alert{ background: oklch(0.32 0.08 30); color: oklch(0.85 0.12 30); }
+  .pill.ok{ background: oklch(0.32 0.07 145); color: oklch(0.85 0.12 145); }
+  .foot{ padding: var(--s4) var(--s8); background: oklch(0.18 0.006 90); border-top:1px solid var(--line-soft); font-size:0.75rem; color: var(--muted); display:flex; justify-content:space-between; align-items:center; }
+  .foot b{ color: var(--accent); font-weight:600; }
+  @media(max-width:680px){ .kpis{ grid-template-columns:1fr 1fr; } .rhead,.summary,.kpis,.tbl-wrap{ padding-left:var(--s4); padding-right:var(--s4);} .summary{ margin-left:var(--s4); margin-right:var(--s4);} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="genbar">
+      <span class="pulse"></span>
+      <div class="txt"><b>Generado automáticamente</b> <span>· lunes 06:00 · fuente: FitnessKPI + ERP · sin intervención manual</span></div>
+      <button onclick="regen()">↻ Regenerar</button>
+    </div>
+    <div class="sheet">
+      <div class="rhead">
+        <div class="eyebrow">Informe semanal · Retención y ocupación</div>
+        <h1>Resumen de la semana</h1>
+        <div class="date">Semana 6 - 12 julio 2026 · Red nacional</div>
+      </div>
+      <div class="summary">
+        <div class="lbl"><span class="dot">✦</span> Resumen generado por IA</div>
+        <p><b>La semana cierra con señales mixtas.</b> La captación se mantiene fuerte (+6,2% vs. semana anterior), pero el riesgo de baja sube: ANNA marca <b>40.177 socios en riesgo alto</b>, un 3% más que la semana pasada, concentrados en Generación Z con cuota de acceso ilimitado.</p>
+        <p>Los clubs que más preocupan son <b>Zaragoza - Las Fuentes</b> y <b>Barcelona - Casanova</b>, ambos con repunte de riesgo y caída de visitas. Recomendación: activar retención dirigida en estos dos antes del fin de semana.</p>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="k">Socios activos</div><div class="v">382.706</div><div class="d up">▲ 1,4%</div></div>
+        <div class="kpi"><div class="k">Riesgo alto</div><div class="v">40.177</div><div class="d down">▲ 3,0%</div></div>
+        <div class="kpi"><div class="k">Altas semana</div><div class="v">2.914</div><div class="d up">▲ 6,2%</div></div>
+        <div class="kpi"><div class="k">Bajas semana</div><div class="v">1.803</div><div class="d down">▲ 2,1%</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <div class="tbl-title">Clubs que requieren atención</div>
+        <table>
+          <thead><tr><th>Club</th><th>Riesgo alto</th><th>Visitas vs. sem. ant.</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td class="club">Zaragoza - Las Fuentes</td><td>251</td><td style="color:var(--down)">-8,4%</td><td><span class="pill alert">Actuar</span></td></tr>
+            <tr><td class="club">Barcelona - Casanova</td><td>198</td><td style="color:var(--down)">-6,1%</td><td><span class="pill alert">Actuar</span></td></tr>
+            <tr><td class="club">Terrassa - Universitat</td><td>203</td><td style="color:var(--down)">-3,2%</td><td><span class="pill alert">Actuar</span></td></tr>
+            <tr><td class="club">Valencia - Camí de Montcada</td><td>176</td><td style="color:var(--up)">+1,1%</td><td><span class="pill ok">Estable</span></td></tr>
+            <tr><td class="club">Madrid - Príncipe Pío</td><td>142</td><td style="color:var(--up)">+2,7%</td><td><span class="pill ok">Estable</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="foot">
+        <span>Tiempo de elaboración manual: <b>~3 h</b> · Tiempo automatizado: <b>< 1 min</b></span>
+        <span id="stamp">Actualizado ahora</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    function regen(){
+      const stamp = document.getElementById('stamp');
+      stamp.textContent = 'Regenerando...';
+      setTimeout(()=>{ stamp.textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); }, 700);
+    }
+  </script>
+</body>
+</html>

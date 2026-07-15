@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso de negocio · Retención predictiva de socios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: oklch(0.95 0.01 95);
+    --ink-soft: oklch(0.80 0.012 95);
+    --muted: oklch(0.63 0.012 95);
+    --bg: oklch(0.15 0.006 90);
+    --paper: oklch(0.19 0.007 90);
+    --line: oklch(0.32 0.01 95);
+    --line-soft: oklch(0.26 0.008 95);
+    --accent: oklch(0.86 0.17 96);
+    --accent-deep: oklch(0.78 0.15 96);
+    --accent-ink: oklch(0.20 0.02 96);
+    --accent-wash: oklch(0.28 0.05 96);
+    --seg-loyal: oklch(0.75 0.14 150);
+    --seg-new: oklch(0.70 0.12 232);
+    --seg-casual: oklch(0.80 0.13 90);
+    --seg-risk: oklch(0.86 0.17 96);
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+    --s6: 24px; --s8: 32px; --s10: 40px; --s12: 48px; --s16: 64px;
+    --shadow-md: 0 4px 14px oklch(0 0 0/0.35), 0 1px 3px oklch(0 0 0/0.3);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  body{
+    background: radial-gradient(120% 70% at 100% -10%, var(--accent-wash), transparent 50%), var(--bg);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, system-ui, sans-serif;
+    font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+    padding: var(--s12) var(--s6) var(--s16); font-optical-sizing: auto;
+  }
+  .sheet{ max-width: 880px; margin: 0 auto; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow-md); overflow: hidden; }
+  h1,h2,h3{ font-family: "Fraunces", Georgia, serif; text-wrap: balance; letter-spacing: -0.01em; }
+  .tnum{ font-variant-numeric: tabular-nums; }
+  .masthead{ padding: var(--s12) var(--s12) var(--s10); border-bottom: 1px solid var(--line-soft); position: relative; }
+  .eyebrow{ display:inline-flex; align-items:center; gap: var(--s2); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); padding: 6px 12px; border-radius: 100px; margin-bottom: var(--s6); }
+  .eyebrow::before{ content:""; width:6px; height:6px; border-radius:50%; background: var(--accent-ink); }
+  h1{ font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 600; line-height: 1.05; color: var(--ink); max-width: 20ch; }
+  h1 em{ font-style: italic; color: var(--accent); }
+  .thesis{ margin-top: var(--s6); font-size: 1.18rem; line-height: 1.5; color: var(--ink-soft); max-width: 62ch; text-wrap: pretty; }
+  .thesis strong{ color: var(--ink); font-weight: 600; }
+  .meta-row{ margin-top: var(--s8); display:flex; flex-wrap: wrap; gap: var(--s2) var(--s6); font-size: 0.8rem; color: var(--muted); padding-top: var(--s6); border-top: 1px dashed var(--line); }
+  .meta-row b{ color: var(--ink); font-weight: 600; }
+  section{ padding: var(--s10) var(--s12); border-bottom: 1px solid var(--line-soft); }
+  section:last-child{ border-bottom: none; }
+  .kicker{ font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display:flex; align-items:center; gap: var(--s3); margin-bottom: var(--s6); }
+  .kicker .n{ font-family:"Fraunces",serif; font-size: 0.85rem; color: var(--accent); font-weight: 600; letter-spacing: 0; }
+  .kicker::after{ content:""; flex:1; height:1px; background: var(--line); }
+  h2{ font-size: 1.55rem; font-weight: 600; line-height: 1.15; color: var(--ink); margin-bottom: var(--s4); }
+  p.lead{ font-size: 1.02rem; color: var(--ink-soft); max-width: 66ch; text-wrap: pretty; }
+  .problem-grid{ display:grid; grid-template-columns: 1.15fr 1fr; gap: var(--s10); align-items: center; margin-top: var(--s2); }
+  .bigstat{ font-family:"Fraunces",serif; font-weight: 600; line-height: 0.95; font-size: clamp(3.2rem, 8vw, 4.6rem); color: var(--accent); letter-spacing: -0.02em; }
+  .bigstat small{ display:block; font-family:"Inter",sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--muted); margin-top: var(--s3); letter-spacing: 0; line-height:1.4; max-width: 30ch;}
+  .problem-note{ font-size: 0.95rem; color: var(--ink-soft); }
+  .problem-note p + p{ margin-top: var(--s4); }
+  .method{ display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--s6); margin-top: var(--s2); }
+  .step{ position: relative; padding-top: var(--s4); }
+  .step .tag{ font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color: var(--accent-deep); }
+  .step h3{ font-size: 1.08rem; font-weight: 600; margin: var(--s2) 0 var(--s3); color: var(--ink); }
+  .step p{ font-size: 0.9rem; color: var(--muted); line-height:1.5; }
+  .step::before{ content:""; position:absolute; top:0; left:0; width: 34px; height: 3px; border-radius: 3px; background: var(--accent); }
+  .chips{ display:flex; flex-wrap:wrap; gap: var(--s2); margin-top: var(--s8); }
+  .chip{ font-size: 0.76rem; font-weight: 500; color: var(--ink-soft); background: oklch(0.24 0.008 95); border: 1px solid var(--line); padding: 5px 11px; border-radius: 7px; }
+  .chip b{ color: var(--accent-deep); font-weight:600; }
+  .segments{ display:flex; flex-direction: column; gap: var(--s3); margin-top: var(--s2); }
+  .seg{ display:grid; grid-template-columns: 200px 1fr auto; align-items:center; gap: var(--s6); padding: var(--s4) 0; border-bottom: 1px solid var(--line-soft); }
+  .seg:last-child{ border-bottom:none; }
+  .seg-name{ display:flex; align-items:center; gap: var(--s3); font-weight: 600; font-size: 0.98rem; color: var(--ink); }
+  .dot{ width: 11px; height: 11px; border-radius: 3px; flex:none; }
+  .seg-desc{ font-size: 0.86rem; color: var(--muted); line-height:1.45; }
+  .seg-bar{ display:flex; align-items:center; gap: var(--s3); min-width: 150px; justify-content:flex-end;}
+  .track{ width: 96px; height: 8px; border-radius: 100px; background: oklch(0.26 0.008 95); overflow:hidden; }
+  .fill{ height:100%; border-radius:100px; }
+  .pct{ font-family:"Fraunces",serif; font-weight:600; font-size: 1rem; min-width: 3.2ch; text-align:right; }
+  .money{ background: linear-gradient(180deg, oklch(0.86 0.17 96), oklch(0.80 0.16 96)); color: var(--accent-ink); padding: var(--s12); }
+  .money .kicker{ color: oklch(0.30 0.04 96); }
+  .money .kicker::after{ background: oklch(0.45 0.06 96); }
+  .money .kicker .n{ color: oklch(0.20 0.02 96); }
+  .money h2{ color: var(--accent-ink); }
+  .money p.lead{ color: oklch(0.30 0.03 96); }
+  .calc{ margin-top: var(--s8); border: 1px solid oklch(0.60 0.10 96); border-radius: 12px; overflow:hidden; }
+  .calc-row{ display:grid; grid-template-columns: 1fr auto; gap: var(--s6); padding: var(--s4) var(--s6); border-bottom: 1px solid oklch(0.68 0.10 96); align-items: baseline; }
+  .calc-row:last-child{ border-bottom:none; }
+  .calc-row .label{ font-size: 0.92rem; color: oklch(0.28 0.03 96); }
+  .calc-row .label small{ display:block; font-size:0.76rem; color: oklch(0.42 0.04 96); margin-top:2px;}
+  .calc-row .val{ font-family:"Fraunces",serif; font-weight:600; font-size:1.1rem; font-variant-numeric: tabular-nums; color: var(--accent-ink); }
+  .calc-row.op .val{ color: oklch(0.35 0.06 60); }
+  .calc-row.result{ background: var(--accent-ink); padding: var(--s6); }
+  .calc-row.result .label{ color: oklch(0.95 0.02 96); font-weight:600; font-size:1rem; }
+  .calc-row.result .val{ font-size: 1.7rem; color: var(--accent); }
+  .range{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s6); }
+  .range-card{ border:1px solid oklch(0.60 0.10 96); border-radius:10px; padding: var(--s6); }
+  .range-card .rl{ font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase; color: oklch(0.35 0.05 96); font-weight:600; }
+  .range-card .rv{ font-family:"Fraunces",serif; font-weight:600; font-size:1.9rem; margin-top: var(--s2); font-variant-numeric: tabular-nums; color: var(--accent-ink); }
+  .range-card.obj{ border-color: var(--accent-ink); background: oklch(0.82 0.12 96); }
+  .range-card .rn{ font-size:0.8rem; color: oklch(0.35 0.04 96); margin-top: var(--s2); }
+  .ask-list{ counter-reset: ask; margin-top: var(--s6); display:flex; flex-direction:column; gap: var(--s4); max-width: 68ch;}
+  .ask-item{ display:flex; gap: var(--s4); align-items: baseline; }
+  .ask-item .num{ counter-increment: ask; flex:none; font-family:"Fraunces",serif; font-weight:600; font-size:0.95rem; color: var(--accent); width: 26px; height:26px; border-radius:50%; border:1.5px solid var(--accent); display:grid; place-items:center; line-height:1; }
+  .ask-item .num::before{ content: counter(ask); }
+  .ask-item .txt{ font-size:0.98rem; color: var(--ink-soft); }
+  .ask-item .txt b{ color: var(--ink); font-weight:600; }
+  footer{ padding: var(--s6) var(--s12) var(--s10); font-size: 0.76rem; color: var(--muted); line-height:1.55; background: oklch(0.17 0.006 90); border-top: 1px solid var(--line-soft); }
+  footer b{ color: var(--ink-soft); font-weight:600; }
+  @media (prefers-reduced-motion: no-preference){
+    .anim{ opacity:0; transform: translateY(14px); animation: rise 0.7s var(--ease) forwards; animation-delay: calc(var(--i,0) * 90ms); }
+    @keyframes rise{ to{ opacity:1; transform:none; } }
+  }
+  @media (max-width: 720px){
+    body{ padding: var(--s4); }
+    .masthead, section, .money, footer{ padding-left: var(--s6); padding-right: var(--s6); }
+    .problem-grid, .method{ grid-template-columns: 1fr; gap: var(--s6); }
+    .seg{ grid-template-columns: 1fr; gap: var(--s2); }
+    .seg-bar{ justify-content:flex-start; }
+    .range{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="masthead">
+      <span class="eyebrow anim" style="--i:0">Caso de negocio · Retención predictiva</span>
+      <h1 class="anim" style="--i:1">Predecir la baja antes de que ocurra y <em>salvar el ingreso recurrente</em></h1>
+      <p class="thesis anim" style="--i:2">Un modelo de machine learning que identifica qué socios están a punto de darse de baja y por qué, para activar retención dirigida <strong>antes</strong> de perder la cuota.</p>
+      <div class="meta-row anim" style="--i:3">
+        <span>Autor: <b>Pol Martín</b></span>
+        <span>Base: <b>XGBoost + K-Means + SHAP</b></span>
+        <span>Metodología: <b>CRISP-DM</b></span>
+      </div>
+    </header>
+
+    <section class="anim" style="--i:4">
+      <div class="kicker"><span class="n">01</span> El problema</div>
+      <div class="problem-grid">
+        <div><div class="bigstat tnum">~4,5%<small>de bajas mensuales en un club fitness tipo. Cada punto que no se recupera es cuota perdida que rara vez vuelve.</small></div></div>
+        <div class="problem-note">
+          <p>Hoy la retención es <b>reactiva</b>: reaccionamos cuando el socio ya se ha ido, cuando ya no hay nada que hacer.</p>
+          <p>El coste de captar un socio nuevo supera con creces el de retener uno existente. Cada baja evitable es margen que se tira.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="anim" style="--i:5">
+      <div class="kicker"><span class="n">02</span> La solución</div>
+      <h2>De reaccionar a anticipar</h2>
+      <p class="lead">El sistema combina dos modelos y una capa de interpretabilidad, para no solo predecir sino explicar y actuar.</p>
+      <div class="method">
+        <div class="step"><span class="tag">Predice</span><h3>XGBoost de churn</h3><p>Asigna a cada socio una probabilidad de baja en los próximos días. Ordena por riesgo para priorizar dónde actuar.</p></div>
+        <div class="step"><span class="tag">Segmenta</span><h3>K-Means · 4 grupos</h3><p>Agrupa la cartera por comportamiento real de uso, no por demografía. Cada segmento pide una acción distinta.</p></div>
+        <div class="step"><span class="tag">Explica</span><h3>SHAP</h3><p>Revela qué señales disparan cada baja, para diseñar la intervención correcta y no disparar a ciegas.</p></div>
+      </div>
+      <div class="chips">
+        <span class="chip">Señales de riesgo (SHAP):</span>
+        <span class="chip"><b>Días</b> desde última visita</span>
+        <span class="chip">Caída de <b>frecuencia</b> mensual</span>
+        <span class="chip">Antigüedad <b>&lt; 3 meses</b></span>
+        <span class="chip">Método de pago</span>
+        <span class="chip">Uso de clases</span>
+      </div>
+    </section>
+
+    <section class="anim" style="--i:6">
+      <div class="kicker"><span class="n">03</span> Los 4 segmentos de socio</div>
+      <h2>Cada grupo, una jugada distinta</h2>
+      <div class="segments">
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-loyal)"></span>Embajadores fieles</div><div class="seg-desc">Uso alto y constante. Riesgo mínimo. Palanca de referidos y upsell.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-loyal)">bajo</span><div class="track"><div class="fill" style="width:12%;background:var(--seg-loyal)"></div></div></div></div>
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-new)"></span>Nuevos entusiastas</div><div class="seg-desc">Recién llegados con impulso alto. El onboarding define si se quedan.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-new)">medio</span><div class="track"><div class="fill" style="width:45%;background:var(--seg-new)"></div></div></div></div>
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-casual)"></span>Usuarios casuales</div><div class="seg-desc">Van y vienen. Frecuencia irregular. Reactivación y hábitos.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-casual)">medio-alto</span><div class="track"><div class="fill" style="width:62%;background:var(--seg-casual)"></div></div></div></div>
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-risk)"></span>Socios en riesgo</div><div class="seg-desc">Frecuencia en caída, señales de baja activas. Intervención inmediata.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-risk)">alto</span><div class="track"><div class="fill" style="width:88%;background:var(--seg-risk)"></div></div></div></div>
+      </div>
+    </section>
+
+    <section class="money anim" style="--i:7">
+      <div class="kicker"><span class="n">04</span> El impacto económico</div>
+      <h2>Cuánto ingreso está en juego</h2>
+      <p class="lead">Modelo simplificado sobre una base ilustrativa. Los supuestos se sustituyen por las cifras reales para afinar el número.</p>
+      <div class="calc">
+        <div class="calc-row"><div class="label">Base de socios <small>supuesto ajustable</small></div><div class="val tnum">50.000</div></div>
+        <div class="calc-row"><div class="label">Cuota media mensual <small>supuesto ajustable</small></div><div class="val tnum">29,99 €</div></div>
+        <div class="calc-row"><div class="label">Bajas mensuales <small>4,5% de la base</small></div><div class="val tnum">2.250</div></div>
+        <div class="calc-row op"><div class="label">Socios recuperados con retención dirigida <small>escenario objetivo: 18% de las bajas</small></div><div class="val tnum">≈ 405 / mes</div></div>
+        <div class="calc-row result"><div class="label">Ingreso recurrente recuperado</div><div class="val tnum">≈ 145.750 € / año</div></div>
+      </div>
+      <div class="range">
+        <div class="range-card"><div class="rl">Escenario conservador</div><div class="rv tnum">≈ 81.000 €</div><div class="rn">recuperación del 10% de las bajas al año</div></div>
+        <div class="range-card obj"><div class="rl">Escenario objetivo</div><div class="rv tnum">≈ 145.750 €</div><div class="rn">recuperación del 18% de las bajas al año</div></div>
+      </div>
+    </section>
+
+    <section class="anim" style="--i:8">
+      <div class="kicker"><span class="n">05</span> La propuesta</div>
+      <h2>Del piloto a la retención sistemática</h2>
+      <div class="ask-list">
+        <div class="ask-item"><span class="num"></span><span class="txt"><b>Piloto de 8 semanas</b> en 1 o 2 clubs: puntuar la cartera por riesgo y activar retención dirigida sobre el segmento en riesgo.</span></div>
+        <div class="ask-item"><span class="num"></span><span class="txt"><b>Medir contra un grupo de control</b> para aislar el efecto real sobre la tasa de baja y validar el ahorro estimado.</span></div>
+        <div class="ask-item"><span class="num"></span><span class="txt"><b>Acceso a los datos de socios</b> (visitas, cuotas, altas y bajas) para entrenar el modelo con datos reales.</span></div>
+        <div class="ask-item"><span class="num"></span><span class="txt">Si el piloto valida el número, <b>escalar a toda la red</b> e integrarlo en el flujo operativo de retención.</span></div>
+      </div>
+    </section>
+
+    <footer><b>Nota metodológica.</b> Cifras económicas ilustrativas basadas en supuestos de sector, ajustables con datos reales. El modelo (XGBoost + K-Means + SHAP, metodología CRISP-DM) se desarrolló sobre un dataset de 50.000 socios; el impacto definitivo se confirma con el piloto medido contra grupo de control.</footer>
+  </div>
+</body>
+</html>
