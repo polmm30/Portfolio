@@ -43,24 +43,6 @@
     function markEditable() {
         document.body.classList.add('artifact-editable');
     }
-
-    // Credit badge with idle-fade. Hover devices only.
-    function initChromeUI() {
-        if (!matchMedia('(hover: hover)').matches) return;
-
-        var credit = document.createElement('div');
-        document.body.appendChild(credit);
-
-        var timer = null;
-        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
-        fade(true);
-        var show = function () {
-            fade(false);
-            clearTimeout(timer);
-            timer = setTimeout(function () { fade(true); }, 3000);
-        };
-        document.addEventListener('mousemove', show);
-        show();
     }
 
     function init() {
