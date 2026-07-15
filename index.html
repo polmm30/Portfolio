@@ -1,378 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- skill:chrome -->
-<style>
-/* Credit line — bottom-right */
-.design-ui-credit {
-  position: fixed;
-  bottom: 12px;
-  right: 12px;
-  font: 11px/1 system-ui, sans-serif;
-  color: rgba(128,128,128,0.5);
-  pointer-events: none;
-  z-index: 2147483647;
-  transition: opacity 0.4s ease;
-  user-select: none;
-  letter-spacing: 0.02em;
-}
-
-/* Hide chrome on touch devices */
-@media (hover: none) {
-  .design-ui-credit { display: none; }
-}
-
-/* Print fixes */
-@media print {
-  * {
-    transition: none !important;
-    animation: none !important;
-    box-shadow: none !important;
-  }
-  body {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-  .design-ui-credit { display: none !important; }
-}
-
-</style>
-<script>
-(function () {
-    // Design-ui pages are single compositions, so the whole body is editable.
-    function markEditable() {
-        document.body.classList.add('artifact-editable');
-    }
-  
-})();
-
-</script>
-<!-- /skill:chrome -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pol Martín Novillo · IA & Datos · Especialista en Sistemas IT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: oklch(0.16 0.006 90);
-    --bg-2: oklch(0.19 0.007 90);
-    --card: oklch(0.21 0.008 90);
-    --ink: oklch(0.96 0.01 95);
-    --ink-soft: oklch(0.80 0.012 95);
-    --muted: oklch(0.62 0.012 95);
-    --line: oklch(0.30 0.01 95);
-    --line-soft: oklch(0.26 0.008 95);
-    --accent: oklch(0.86 0.17 96);
-    --accent-deep: oklch(0.78 0.15 96);
-    --accent-ink: oklch(0.20 0.02 96);
-
+    --bg:oklch(0.16 0.006 90);--bg-2:oklch(0.19 0.007 90);--card:oklch(0.21 0.008 90);
+    --ink:oklch(0.96 0.01 95);--ink-soft:oklch(0.80 0.012 95);--muted:oklch(0.62 0.012 95);
+    --line:oklch(0.30 0.01 95);--line-soft:oklch(0.26 0.008 95);--accent:oklch(0.86 0.17 96);
+    --accent-deep:oklch(0.78 0.15 96);--accent-ink:oklch(0.20 0.02 96);
     --s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;--s10:40px;--s12:48px;--s16:64px;--s20:80px;
-    --ease: cubic-bezier(0.22,1,0.36,1);
-    --shadow: 0 4px 20px oklch(0 0 0/0.35);
+    --ease:cubic-bezier(0.22,1,0.36,1);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background: var(--bg);
-    color: var(--ink);
-    font-family:"Inter", system-ui, sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    font-optical-sizing:auto;
-  }
-  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 var(--s6); }
-  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; letter-spacing:-0.02em; text-wrap:balance; }
-
-  header.hero{
-    background:
-      radial-gradient(130% 90% at 100% -10%, oklch(0.4 0.09 96) 0%, transparent 48%),
-      var(--bg);
-    padding: var(--s20) 0 var(--s16);
-    border-bottom:1px solid var(--line-soft);
-  }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:0.74rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
-    color: var(--accent-ink); background: var(--accent);
-    padding:7px 14px; border-radius:100px; margin-bottom: var(--s8);
-  }
-  header.hero h1{ font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight:600; line-height:1.02; max-width:16ch; }
-  header.hero h1 em{ font-style:italic; color:var(--accent); }
-  header.hero .tag{ font-size:1.15rem; color: var(--ink-soft); max-width:60ch; margin-top: var(--s6); text-wrap:pretty; }
-  .meta{ display:flex; flex-wrap:wrap; gap: var(--s3) var(--s8); margin-top: var(--s10); font-size:0.9rem; color:var(--muted); padding-top: var(--s6); border-top:1px dashed var(--line); }
-  .meta b{ color: var(--ink); font-weight:600; }
-  .meta a{ color: var(--accent-deep); text-decoration:none; }
-  .meta a:hover{ text-decoration:underline; }
-
-  section{ padding: var(--s16) 0; }
-  .kicker{ font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:var(--s3); margin-bottom:var(--s8); }
-  .kicker .n{ font-family:"Fraunces",serif; color:var(--accent); font-size:0.9rem; }
-  .kicker::after{ content:""; flex:1; height:1px; background:var(--line); }
-  h2.sec{ font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight:600; margin-bottom: var(--s4); }
-  p.lead{ font-size:1.05rem; color: var(--ink-soft); max-width:64ch; text-wrap:pretty; }
-
-  .about{ background: var(--bg-2); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); }
-  .about-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--s10); margin-top: var(--s10); }
-  .about-grid .item h3{ font-family:"Inter",sans-serif; font-weight:600; font-size:1.05rem; color:var(--accent); margin-bottom: var(--s2); }
-  .about-grid .item p{ font-size:0.95rem; color: var(--ink-soft); }
-
-  .projects{ display:flex; flex-direction:column; gap: var(--s6); margin-top:var(--s10); }
-  .proj{
-    display:grid; grid-template-columns: 100px 1fr auto; gap: var(--s8);
-    align-items:center; background: var(--card); border:1px solid var(--line);
-    border-radius:16px; padding: var(--s8); transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
-    text-decoration:none; color:inherit;
-  }
-  .proj:hover{ border-color: var(--accent); transform: translateY(-3px); }
-  .proj .idx{ font-family:"Fraunces",serif; font-size:2.6rem; font-weight:600; color: var(--accent); line-height:1; }
-  .proj .body h3{ font-family:"Inter",sans-serif; font-weight:600; font-size:1.25rem; margin-bottom:6px; }
-  .proj .body p{ font-size:0.95rem; color: var(--muted); max-width:60ch; }
-  .proj .body .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top: var(--s3); }
-  .proj .body .t{ font-size:0.72rem; font-weight:500; color:var(--accent-deep); background: oklch(0.26 0.05 96); border:1px solid oklch(0.36 0.06 96); padding:3px 9px; border-radius:6px; }
-  .proj .cta{ font-size:0.85rem; font-weight:600; color: var(--accent); white-space:nowrap; }
-
-  .tl{ margin-top: var(--s10); border-left:2px solid var(--line); padding-left: var(--s8); display:flex; flex-direction:column; gap: var(--s10); }
-  .job{ position:relative; }
-  .job::before{ content:""; position:absolute; left: calc(-1 * var(--s8) - 7px); top:6px; width:12px; height:12px; border-radius:50%; background: var(--accent); border:3px solid var(--bg); }
-  .job .when{ font-family:"Inter",sans-serif; font-size:0.8rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color: var(--accent-deep); }
-  .job h3{ font-family:"Inter",sans-serif; font-weight:600; font-size:1.2rem; margin: 4px 0 2px; }
-  .job .org{ font-size:0.95rem; color: var(--muted); margin-bottom: var(--s3); }
-  .job ul{ list-style:none; padding:0; display:flex; flex-direction:column; gap:8px; }
-  .job li{ font-size:0.94rem; color: var(--ink-soft); padding-left: var(--s4); position:relative; }
-  .job li::before{ content:"▪"; position:absolute; left:0; color: var(--accent); }
-
-  .split{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--s16); margin-top: var(--s10); }
-  .edu-item{ padding-bottom: var(--s6); margin-bottom: var(--s6); border-bottom:1px solid var(--line-soft); }
-  .edu-item:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
-  .edu-item h3{ font-family:"Inter",sans-serif; font-weight:600; font-size:1.02rem; }
-  .edu-item p{ font-size:0.88rem; color: var(--muted); margin-top:3px; }
-  .skill-group{ margin-bottom: var(--s8); }
-  .skill-group h4{ font-family:"Inter",sans-serif; font-weight:600; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase; color: var(--accent); margin-bottom: var(--s4); }
-  .chips{ display:flex; flex-wrap:wrap; gap: var(--s2); }
-  .chip{ font-size:0.82rem; font-weight:500; color: var(--ink-soft); background: var(--card); border:1px solid var(--line); padding:6px 12px; border-radius:8px; }
-  .chip.hl{ background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight:600; }
-
-  .langs{ display:flex; gap: var(--s8); margin-top: var(--s8); flex-wrap:wrap; }
-  .lang{ font-size:0.9rem; }
-  .lang b{ color: var(--ink); font-weight:600; display:block; }
-  .lang span{ color: var(--muted); font-size:0.82rem; }
-
-  .contact{ background: var(--accent); color: var(--accent-ink); border-radius: 20px; padding: var(--s16) var(--s12); text-align:center; margin: var(--s16) 0; }
-  .contact h2{ font-size: clamp(1.8rem,4vw,2.8rem); font-weight:600; max-width:20ch; margin:0 auto var(--s4); }
-  .contact p{ color: oklch(0.30 0.03 96); font-size:1.05rem; max-width:48ch; margin:0 auto var(--s8); }
-  .contact .btns{ display:flex; gap:var(--s3); justify-content:center; flex-wrap:wrap; }
-  .contact a{ display:inline-block; background: var(--accent-ink); color: var(--accent); font-weight:600; font-size:0.95rem; padding:14px 28px; border-radius:10px; text-decoration:none; transition: filter 0.15s, transform 0.15s var(--ease); }
-  .contact a:hover{ filter:brightness(1.2); transform: translateY(-2px); }
-
-  footer.foot{ padding: var(--s10) 0 var(--s16); font-size:0.8rem; color:var(--muted); text-align:center; }
-
-  .anim{ opacity:0; transform: translateY(16px); animation: rise 0.7s var(--ease) forwards; animation-delay: calc(var(--i,0)*70ms); }
-  @keyframes rise{ to{ opacity:1; transform:none; } }
-
-  @media(max-width:760px){
-    .about-grid, .split{ grid-template-columns:1fr; gap:var(--s8); }
-    .proj{ grid-template-columns:1fr; gap:var(--s4); }
-    .proj .idx{ font-size:2rem; }
-    .proj .cta{ justify-self:start; }
-  }
+  body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 var(--s6);}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;letter-spacing:-0.02em;}
+  header.hero{background:radial-gradient(130% 90% at 100% -10%,oklch(0.4 0.09 96) 0%,transparent 48%),var(--bg);padding:var(--s20) 0 var(--s16);border-bottom:1px solid var(--line-soft);}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.74rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:7px 14px;border-radius:100px;margin-bottom:var(--s8);}
+  header.hero h1{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:600;line-height:1.02;max-width:16ch;}
+  header.hero h1 em{font-style:italic;color:var(--accent);}
+  header.hero .tag{font-size:1.15rem;color:var(--ink-soft);max-width:60ch;margin-top:var(--s6);}
+  .meta{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s8);margin-top:var(--s10);font-size:0.9rem;color:var(--muted);padding-top:var(--s6);border-top:1px dashed var(--line);}
+  .meta b{color:var(--ink);font-weight:600;} .meta a{color:var(--accent-deep);text-decoration:none;}
+  section{padding:var(--s16) 0;}
+  .kicker{font-size:0.74rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s8);}
+  .kicker .n{font-family:"Fraunces",serif;color:var(--accent);font-size:0.9rem;}
+  .kicker::after{content:"";flex:1;height:1px;background:var(--line);}
+  h2.sec{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:600;margin-bottom:var(--s4);}
+  p.lead{font-size:1.05rem;color:var(--ink-soft);max-width:64ch;}
+  .about{background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+  .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s10);margin-top:var(--s10);}
+  .about-grid .item h3{font-family:"Inter",sans-serif;font-weight:600;font-size:1.05rem;color:var(--accent);margin-bottom:var(--s2);}
+  .about-grid .item p{font-size:0.95rem;color:var(--ink-soft);}
+  .projects{display:flex;flex-direction:column;gap:var(--s6);margin-top:var(--s10);}
+  .proj{display:grid;grid-template-columns:100px 1fr auto;gap:var(--s8);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:var(--s8);transition:border-color 0.2s var(--ease),transform 0.2s var(--ease);text-decoration:none;color:inherit;}
+  .proj:hover{border-color:var(--accent);transform:translateY(-3px);}
+  .proj .idx{font-family:"Fraunces",serif;font-size:2.6rem;font-weight:600;color:var(--accent);line-height:1;}
+  .proj .body h3{font-family:"Inter",sans-serif;font-weight:600;font-size:1.25rem;margin-bottom:6px;}
+  .proj .body p{font-size:0.95rem;color:var(--muted);max-width:60ch;}
+  .proj .body .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s3);}
+  .proj .body .t{font-size:0.72rem;font-weight:500;color:var(--accent-deep);background:oklch(0.26 0.05 96);border:1px solid oklch(0.36 0.06 96);padding:3px 9px;border-radius:6px;}
+  .proj .cta{font-size:0.85rem;font-weight:600;color:var(--accent);white-space:nowrap;}
+  .contact{background:var(--accent);color:var(--accent-ink);border-radius:20px;padding:var(--s16) var(--s12);text-align:center;margin:var(--s16) 0;}
+  .contact h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;max-width:20ch;margin:0 auto var(--s4);}
+  .contact p{color:oklch(0.30 0.03 96);font-size:1.05rem;max-width:48ch;margin:0 auto var(--s8);}
+  .contact a{display:inline-block;background:var(--accent-ink);color:var(--accent);font-weight:600;font-size:0.95rem;padding:14px 28px;border-radius:10px;text-decoration:none;margin:0 6px;}
+  footer.foot{padding:var(--s10) 0 var(--s16);font-size:0.8rem;color:var(--muted);text-align:center;}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:var(--s8);}.proj{grid-template-columns:1fr;gap:var(--s4);}}
 </style>
 </head>
 <body>
-
-  <header class="hero">
-    <div class="wrap">
-      <span class="eyebrow anim" style="--i:0">Portfolio · IA & Datos · Sistemas IT</span>
-      <h1 class="anim" style="--i:1">Pol Martín Novillo.<br>Conecto sistemas, datos y <em>machine learning</em>.</h1>
-      <p class="tag anim" style="--i:2">Especialista en Sistemas IT con un Máster en IA y Big Data recién finalizado, operando en una cadena de fitness multi-site en plena expansión. Conecto infraestructura, soporte y machine learning aplicado para automatizar flujos operativos y generar impacto medible.</p>
-      <div class="meta anim" style="--i:3">
-        <span><b>Email:</b> <a href="mailto:polmartinnovillo@gmail.com">polmartinnovillo@gmail.com</a></span>
-        <span><b>Tel:</b> 611 421 607</span>
-        <span><b>Ubicación:</b> L'Hospitalet de Llobregat, Barcelona</span>
-        <span><a href="https://linkedin.com/in/pol-martín-novillo-7aa21a242" target="_blank">LinkedIn</a></span>
-      </div>
+  <header class="hero"><div class="wrap">
+    <span class="eyebrow">Portfolio · IA & Datos · Sistemas IT</span>
+    <h1>Pol Martín Novillo.<br>Conecto sistemas, datos y <em>machine learning</em>.</h1>
+    <p class="tag">Especialista en Sistemas IT con un Máster en IA y Big Data recién finalizado, operando en una cadena de fitness multi-site en plena expansión. Conecto infraestructura, soporte y machine learning aplicado para automatizar flujos operativos y generar impacto medible.</p>
+    <div class="meta">
+      <span><b>Email:</b> <a href="mailto:polmartinnovillo@gmail.com">polmartinnovillo@gmail.com</a></span>
+      <span><b>Tel:</b> 611 421 607</span>
+      <span><b>Ubicación:</b> L'Hospitalet de Llobregat, Barcelona</span>
     </div>
-  </header>
+  </div></header>
 
-  <section class="about">
-    <div class="wrap">
-      <div class="kicker anim" style="--i:0"><span class="n">01</span> Sobre mí</div>
-      <h2 class="sec anim" style="--i:1">Perfil híbrido: infraestructura + datos + negocio</h2>
-      <p class="lead anim" style="--i:2">No solo construyo modelos ni solo administro sistemas. Aprovecho el conocimiento profundo de la operativa para detectar dónde la IA y la automatización generan valor real.</p>
-      <div class="about-grid">
-        <div class="item anim" style="--i:3"><h3>IA aplicada</h3><p>Predicción de churn, segmentación de clientes e IA generativa para automatizar flujos operativos.</p></div>
-        <div class="item anim" style="--i:4"><h3>Sistemas IT</h3><p>Administración de M365, Google Workspace, Windows Server y soporte técnico en +90 clubes.</p></div>
-        <div class="item anim" style="--i:5"><h3>De dato a acción</h3><p>Traduzco modelos y datos a decisiones que el negocio entiende, ejecuta y mide en euros.</p></div>
-      </div>
+  <section class="about"><div class="wrap">
+    <div class="kicker"><span class="n">01</span> Sobre mí</div>
+    <h2 class="sec">Perfil híbrido: infraestructura + datos + negocio</h2>
+    <p class="lead">No solo construyo modelos ni solo administro sistemas. Aprovecho el conocimiento profundo de la operativa para detectar dónde la IA y la automatización generan valor real.</p>
+    <div class="about-grid">
+      <div class="item"><h3>IA aplicada</h3><p>Predicción de churn, segmentación de clientes e IA generativa para automatizar flujos operativos.</p></div>
+      <div class="item"><h3>Sistemas IT</h3><p>Administración de M365, Google Workspace, Windows Server y soporte técnico en +90 clubes.</p></div>
+      <div class="item"><h3>De dato a acción</h3><p>Traduzco modelos y datos a decisiones que el negocio entiende, ejecuta y mide en euros.</p></div>
     </div>
-  </section>
+  </div></section>
 
-  <section>
-    <div class="wrap">
-      <div class="kicker anim" style="--i:0"><span class="n">02</span> Proyectos</div>
-      <h2 class="sec anim" style="--i:1">Lo que he construido</h2>
-      <p class="lead anim" style="--i:2">Casos reales, no ejercicios de clase. Cada uno resuelve un problema de negocio concreto.</p>
-
-      <div class="projects">
-        <a class="proj anim" style="--i:3" href="caso-churn.html" target="_blank">
-          <div class="idx">01</div>
-          <div class="body">
-            <h3>Sistema predictivo de churn (TFM)</h3>
-            <p>Pipeline de ML de extremo a extremo para predecir bajas de socios y segmentar la base en grupos accionables. Ingeniería de características, SMOTE, benchmarking de modelos, GridSearchCV e interpretabilidad con SHAP. Privacidad desde el diseño, conforme al RGPD.</p>
-            <div class="tags"><span class="t">XGBoost</span><span class="t">K-Means · 4 segmentos</span><span class="t">SHAP</span><span class="t">SMOTE</span><span class="t">CRISP-DM</span></div>
-          </div>
-          <div class="cta">Ver caso →</div>
-        </a>
-
-        <a class="proj anim" style="--i:4" href="propuesta-direccion.html" target="_blank">
-          <div class="idx">02</div>
-          <div class="body">
-            <h3>Propuesta de retención a dirección</h3>
-            <p>Caso de negocio que detecta una capacidad de predicción de churn infrautilizada y propone activarla con un piloto medible contra grupo de control. Enfoque en impacto económico (LTV en riesgo).</p>
-            <div class="tags"><span class="t">Business case</span><span class="t">Retención</span><span class="t">LTV</span></div>
-          </div>
-          <div class="cta">Ver deck →</div>
-        </a>
-
-        <a class="proj anim" style="--i:5" href="demo-ia.html" target="_blank">
-          <div class="idx">03</div>
-          <div class="body">
-            <h3>IA aplicada a operaciones</h3>
-            <p>Propuesta de casos de uso de IA para una cadena de gimnasios: automatización de informes, asistente de socios y analítica accionable. Enfoque pequeño, visible y medible.</p>
-            <div class="tags"><span class="t">IA generativa</span><span class="t">Automatización</span><span class="t">Ops</span></div>
-          </div>
-          <div class="cta">Ver deck →</div>
-        </a>
-
-        <a class="proj anim" style="--i:6" href="informe-automatizado.html" target="_blank">
-          <div class="idx">04</div>
-          <div class="body">
-            <h3>Informe semanal automatizado</h3>
-            <p>Demo funcional de un informe de retención y ocupación generado por IA sin intervención manual. Reduce de ~3 horas a menos de 1 minuto una tarea semanal recurrente.</p>
-            <div class="tags"><span class="t">Automatización</span><span class="t">BI</span><span class="t">Reporting</span></div>
-          </div>
-          <div class="cta">Ver demo →</div>
-        </a>
-
-        <a class="proj anim" style="--i:7" href="asistente-socios.html" target="_blank">
-          <div class="idx">05</div>
-          <div class="body">
-            <h3>Asistente de socios con IA</h3>
-            <p>Chatbot funcional que responde al instante las dudas frecuentes de socios (horarios, cuotas, bajas, clubs), descargando al equipo de atención de tareas repetitivas.</p>
-            <div class="tags"><span class="t">IA conversacional</span><span class="t">Atención</span><span class="t">UX</span></div>
-          </div>
-          <div class="cta">Ver demo →</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="about">
-    <div class="wrap">
-      <div class="kicker anim" style="--i:0"><span class="n">03</span> Experiencia</div>
-      <h2 class="sec anim" style="--i:1">Trayectoria</h2>
-      <div class="tl">
-        <div class="job anim" style="--i:2">
-          <div class="when">Feb 2025 – Actualidad</div>
-          <h3>Especialista en Sistemas IT y Soporte Digital</h3>
-          <div class="org">Fitness Park (Upgyms Iberia)</div>
-          <ul>
-            <li>Gestión de soporte y sistemas IT en +90 clubes: aprovisionamiento, troubleshooting y configuración técnica integral en aperturas de nuevos centros.</li>
-            <li>Administración de tenants Microsoft 365 y Google Workspace: identidad, control de accesos y ciclo de vida de usuarios.</li>
-            <li>Configuración e integración de sistemas de club: Resamania, hardware de control de accesos, equipamiento conectado y networking on-site.</li>
-            <li>Gestión de incidencias en Zendesk y Jira; despliegue de hardware/software, imaging y soporte remoto.</li>
-            <li>Aprovecho el conocimiento de los sistemas y flujos de la cadena para detectar oportunidades de automatización e IA.</li>
-          </ul>
-        </div>
-        <div class="job anim" style="--i:3">
-          <div class="when">May 2024 – Oct 2024</div>
-          <h3>Administrador de Sistemas IT (Prácticas)</h3>
-          <div class="org">Soctic Society SL</div>
-          <ul>
-            <li>Administración de Windows Server y Active Directory: servicios de dominio, directivas de grupo y aprovisionamiento de usuarios.</li>
-            <li>Resolución de tickets y soporte remoto (TeamViewer, RDP); automatización de tareas mediante scripting en Bash y PowerShell.</li>
-            <li>Buenas prácticas de seguridad y gestión de parches.</li>
-          </ul>
-        </div>
-        <div class="job anim" style="--i:4">
-          <div class="when">Mar 2024 – Feb 2025</div>
-          <h3>Recepción y atención al cliente</h3>
-          <div class="org">Easy Hotel Barcelona Fira</div>
-          <ul>
-            <li>Atención al cliente y gestión de recepción.</li>
-            <li>Comunicación profesional por teléfono y email.</li>
-            <li>Multitarea y resolución de problemas bajo presión.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="kicker anim" style="--i:0"><span class="n">04</span> Formación y competencias</div>
-      <div class="split">
-        <div class="anim" style="--i:1">
-          <h2 class="sec" style="font-size:1.5rem;">Formación</h2>
-          <div style="margin-top:var(--s6);">
-            <div class="edu-item"><h3>Máster en Inteligencia Artificial y Big Data</h3><p>Digitech · 2025 – 2026</p></div>
-            <div class="edu-item"><h3>CFGS Administración de Sistemas en Red (ASIX, Ciberseguridad)</h3><p>Inst. de Logística de Barcelona · 2023 – 2025</p></div>
-            <div class="edu-item"><h3>Curso de Inmersión Lingüística en Inglés</h3><p>Universidad Menéndez Pelayo · 2023</p></div>
-            <div class="edu-item"><h3>Bachillerato Tecnológico</h3><p>Inst. Joanot Martorell · 2020 – 2022</p></div>
-          </div>
-          <div style="margin-top:var(--s10);">
-            <h4 style="font-family:'Inter',sans-serif; font-weight:600; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:var(--s4);">Idiomas</h4>
-            <div class="langs">
-              <div class="lang"><b>Español</b><span>Nativo</span></div>
-              <div class="lang"><b>Catalán</b><span>Nativo</span></div>
-              <div class="lang"><b>Inglés</b><span>B2</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="anim" style="--i:2">
-          <h2 class="sec" style="font-size:1.5rem;">Competencias</h2>
-          <div style="margin-top:var(--s6);">
-            <div class="skill-group">
-              <h4>IA y Datos</h4>
-              <div class="chips">
-                <span class="chip hl">Python</span><span class="chip hl">Machine Learning</span>
-                <span class="chip">pandas</span><span class="chip">scikit-learn</span>
-                <span class="chip">XGBoost</span><span class="chip">K-Means</span><span class="chip">SHAP</span>
-                <span class="chip">Power BI</span><span class="chip hl">IA generativa</span>
-                <span class="chip">Automatización</span><span class="chip">CRISP-DM</span>
-              </div>
-            </div>
-            <div class="skill-group">
-              <h4>IT y Sistemas</h4>
-              <div class="chips">
-                <span class="chip hl">Microsoft 365</span>
-                <span class="chip">Google Workspace</span><span class="chip">Windows Server</span>
-                <span class="chip">Active Directory</span><span class="chip">SQL</span>
-                <span class="chip">Bash / PowerShell</span><span class="chip">Redes</span>
-                <span class="chip">Zendesk · Jira</span><span class="chip">Ciberseguridad</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="wrap">
-    <div class="contact anim" style="--i:0">
-      <h2>¿Hablamos de datos, IA y retención?</h2>
-      <p>Disponible para proyectos de churn, segmentación y analítica aplicada. Escríbeme y lo vemos.</p>
-      <div class="btns">
-        <a href="mailto:polmartinnovillo@gmail.com">polmartinnovillo@gmail.com</a>
-        <a href="https://linkedin.com/in/pol-martín-novillo-7aa21a242" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-
-  <footer class="foot">
-    <div class="wrap">Pol Martín Novillo · IA & Datos · Especialista en Sistemas IT · 2026</div>
-  </footer>
-
-</body>
-</html>
+  <section><div class="wrap">
+    <div class="kicker"><span class="n">02</span> Proyectos</div>
+    <h2 class="sec">Lo que he construido</h2>
+    <p class="lead">Casos reales, no ejercicios de clase. Cada uno resuelve un problema de negocio concreto.</p>
+    <div class="projects">
+      <a class="proj" href="caso-churn.html" target="_blank"><div class="idx">01</div><div class
