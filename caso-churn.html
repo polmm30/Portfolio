@@ -90,18 +90,8 @@
   .ask-item .txt b{color:var(--ink);font-weight:600;}
   footer{padding:var(--s6) var(--s12) var(--s10);font-size:0.76rem;color:var(--muted);line-height:1.55;background:oklch(0.17 0.006 90);border-top:1px solid var(--line-soft);}
   footer b{color:var(--ink-soft);font-weight:600;}
-  @media (prefers-reduced-motion:no-preference){
-    .anim{opacity:0;transform:translateY(14px);animation:rise 0.7s var(--ease) forwards;animation-delay:calc(var(--i,0) * 90ms);}
-    @keyframes rise{to{opacity:1;transform:none;}}
-  }
-  @media (max-width:720px){
-    body{padding:var(--s4);}
-    .masthead,section,.money,footer{padding-left:var(--s6);padding-right:var(--s6);}
-    .problem-grid,.method{grid-template-columns:1fr;gap:var(--s6);}
-    .seg{grid-template-columns:1fr;gap:var(--s2);}
-    .seg-bar{justify-content:flex-start;}
-    .range{grid-template-columns:1fr;}
-  }
+  @media (prefers-reduced-motion: no-preference){.anim{opacity:0;transform:translateY(14px);animation:rise 0.7s var(--ease) forwards;animation-delay:calc(var(--i,0) * 90ms);}@keyframes rise{to{opacity:1;transform:none;}}}
+  @media (max-width:720px){body{padding:var(--s4);}.masthead,section,.money,footer{padding-left:var(--s6);padding-right:var(--s6);}.problem-grid,.method{grid-template-columns:1fr;gap:var(--s6);}.seg{grid-template-columns:1fr;gap:var(--s2);}.seg-bar{justify-content:flex-start;}.range{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -129,4 +119,44 @@
     </section>
 
     <section class="anim" style="--i:5">
-      <div class="kicker"><span class="n">02</span> La solución<
+      <div class="kicker"><span class="n">02</span> La solución</div>
+      <h2>De reaccionar a anticipar</h2>
+      <p class="lead">El sistema combina dos modelos y una capa de interpretabilidad, para no solo predecir sino explicar y actuar.</p>
+      <div class="method">
+        <div class="step"><span class="tag">Predice</span><h3>XGBoost de churn</h3><p>Asigna a cada socio una probabilidad de baja en los próximos días. Ordena por riesgo para priorizar dónde actuar.</p></div>
+        <div class="step"><span class="tag">Segmenta</span><h3>K-Means · 4 grupos</h3><p>Agrupa la cartera por comportamiento real de uso, no por demografía. Cada segmento pide una acción distinta.</p></div>
+        <div class="step"><span class="tag">Explica</span><h3>SHAP</h3><p>Revela qué señales disparan cada baja, para diseñar la intervención correcta y no disparar a ciegas.</p></div>
+      </div>
+      <div class="chips">
+        <span class="chip">Señales de riesgo (SHAP):</span>
+        <span class="chip"><b>Días</b> desde última visita</span>
+        <span class="chip">Caída de <b>frecuencia</b> mensual</span>
+        <span class="chip">Antigüedad <b>< 3 meses</b></span>
+        <span class="chip">Método de pago</span>
+        <span class="chip">Uso de clases</span>
+      </div>
+    </section>
+
+    <section class="anim" style="--i:6">
+      <div class="kicker"><span class="n">03</span> Los 4 segmentos de socio</div>
+      <h2>Cada grupo, una jugada distinta</h2>
+      <div class="segments">
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-loyal)"></span>Embajadores fieles</div><div class="seg-desc">Uso alto y constante. Riesgo mínimo. Palanca de referidos y upsell.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-loyal)">bajo</span><div class="track"><div class="fill" style="width:12%;background:var(--seg-loyal)"></div></div></div></div>
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-new)"></span>Nuevos entusiastas</div><div class="seg-desc">Recién llegados con impulso alto. El onboarding define si se quedan.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-new)">medio</span><div class="track"><div class="fill" style="width:45%;background:var(--seg-new)"></div></div></div></div>
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-casual)"></span>Usuarios casuales</div><div class="seg-desc">Van y vienen. Frecuencia irregular. Reactivación y hábitos.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-casual)">medio-alto</span><div class="track"><div class="fill" style="width:62%;background:var(--seg-casual)"></div></div></div></div>
+        <div class="seg"><div class="seg-name"><span class="dot" style="background:var(--seg-risk)"></span>Socios en riesgo</div><div class="seg-desc">Frecuencia en caída, señales de baja activas. Intervención inmediata.</div><div class="seg-bar"><span class="pct tnum" style="color:var(--seg-risk)">alto</span><div class="track"><div class="fill" style="width:88%;background:var(--seg-risk)"></div></div></div></div>
+      </div>
+    </section>
+
+    <section class="money anim" style="--i:7">
+      <div class="kicker"><span class="n">04</span> El impacto económico</div>
+      <h2>Cuánto ingreso está en juego</h2>
+      <p class="lead">Modelo simplificado sobre una base ilustrativa. Los supuestos se sustituyen por las cifras reales para afinar el número.</p>
+      <div class="calc">
+        <div class="calc-row"><div class="label">Base de socios <small>supuesto ajustable</small></div><div class="val tnum">50.000</div></div>
+        <div class="calc-row"><div class="label">Cuota media mensual <small>supuesto ajustable</small></div><div class="val tnum">29,99 €</div></div>
+        <div class="calc-row"><div class="label">Bajas mensuales <small>4,5% de la base</small></div><div class="val tnum">2.250</div></div>
+        <div class="calc-row op"><div class="label">Socios recuperados con retención dirigida <small>escenario objetivo: 18% de las bajas</small></div><div class="val tnum">≈ 405 / mes</div></div>
+        <div class="calc-row result"><div class="label">Ingreso recurrente recuperado</div><div class="val tnum">≈ 145.750 € / año</div></div>
+      </div>
+      <div class="range
